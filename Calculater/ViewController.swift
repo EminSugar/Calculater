@@ -22,10 +22,15 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var TxtNumbers: UITextField!
     
+    
     var ValueOne = 0.0
     var ValueTwo = 0.0
     var ValueResult = 0.0
     var btnColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
+    var btnColorSelect = UIColor(red: 0.803921568627451, green: 0.8705882352941177, blue: 1, alpha: 1)
+    var Value = 0
+    
+    
     override func viewDidLoad() {
         ButtonStyle()
         
@@ -36,6 +41,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
     func ButtonStyle(){
         BtnMod.layer.borderWidth = 1
         BtnMod.layer.borderColor = UIColor.black.cgColor
@@ -75,9 +81,8 @@ class ViewController: UIViewController {
         
     }
     func ButtonFunction(BtnSelect: String){
-        if ValueOne != 0.0{
             if BtnSelect == "BtnMod"{
-                BtnMod.backgroundColor = UIColor(red: 0.4, green: 1.0, blue: 0.2, alpha: 0.5)
+                BtnMod.backgroundColor = btnColorSelect
                 BtnDivide.backgroundColor = btnColor
                 BtnMultiply.backgroundColor = btnColor
                 BtnSubtract.backgroundColor = btnColor
@@ -85,63 +90,77 @@ class ViewController: UIViewController {
             }
             else if BtnSelect == "BtnDivide"
             {
-                BtnDivide.backgroundColor = UIColor(red: 0.4, green: 1.0, blue: 0.2, alpha: 0.5)
-                BtnMod.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
-                BtnMultiply.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
-                BtnSubtract.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
-                BtnCollect.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
+                BtnDivide.backgroundColor = btnColorSelect
+                BtnMod.backgroundColor = btnColor
+                BtnMultiply.backgroundColor = btnColor
+                BtnSubtract.backgroundColor = btnColor
+                BtnCollect.backgroundColor = btnColor
             }
             else if BtnSelect == "BtnMultiply"
             {
-                BtnMultiply.backgroundColor = UIColor(red: 0.4, green: 1.0, blue: 0.2, alpha: 0.5)
-                BtnDivide.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
-                BtnMod.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
-                BtnSubtract.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
-                BtnCollect.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
+                BtnMultiply.backgroundColor = btnColorSelect
+                BtnDivide.backgroundColor = btnColor
+                BtnMod.backgroundColor = btnColor
+                BtnSubtract.backgroundColor = btnColor
+                BtnCollect.backgroundColor = btnColor
             }
             else if BtnSelect == "BtnSubtract"
             {
-                BtnSubtract.backgroundColor = UIColor(red: 0.4, green: 1.0, blue: 0.2, alpha: 0.5)
-                BtnDivide.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
-                BtnMultiply.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
-                BtnMod.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
-                BtnCollect.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
+                BtnSubtract.backgroundColor = btnColorSelect
+                BtnDivide.backgroundColor = btnColor
+                BtnMultiply.backgroundColor = btnColor
+                BtnMod.backgroundColor = btnColor
+                BtnCollect.backgroundColor = btnColor
             }
             else if BtnSelect == "BtnCollect"
             {
-                BtnCollect.backgroundColor = UIColor(red: 0.4, green: 1.0, blue: 0.2, alpha: 0.5)
-                BtnDivide.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
-                BtnMultiply.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
-                BtnSubtract.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
-                BtnMod.backgroundColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
+                BtnCollect.backgroundColor = btnColorSelect
+                BtnDivide.backgroundColor = btnColor
+                BtnMultiply.backgroundColor = btnColor
+                BtnSubtract.backgroundColor = btnColor
+                BtnMod.backgroundColor = btnColor
+            }
+        if TxtNumbers.text != ""{
+            if ValueOne == 0.0{
+                ValueOne = Double(TxtNumbers.text!)!
+                TxtNumbers.text = ""
             }
         }
     }
     @IBAction func BtnClear(_ sender: Any) {
         TxtNumbers.text = ""
+        TxtNumbers.placeholder = ""
+        ValueOne = 0.0
     }
     @IBAction func BtnReturn(_ sender: Any) {
-        //TxtNumbers.text = Float(-TxtNumbers.text)
+        TxtNumbers.placeholder = String(Double(-1.0) * Double(ValueOne))
+        if TxtNumbers.text == ""{
+            ValueOne = (Double(-1.0) * Double(ValueOne))
+        }else
+        {
+            TxtNumbers.text = String(Double(-1.0) * Double(TxtNumbers.text!)!)
+        }
     }
     
     @IBAction func BtnMod(_ sender: Any) {
         ButtonFunction(BtnSelect: "BtnMod")
+        Value = 5
     }
     @IBAction func BtnDivide(_ sender: Any) {
         ButtonFunction(BtnSelect: "BtnDivide")
+        Value = 4
     }
     @IBAction func BtnMultiply(_ sender: Any) {
         ButtonFunction(BtnSelect: "BtnMultiply")
+        Value = 3
     }
     @IBAction func BtnSubtract(_ sender: Any) {
         ButtonFunction(BtnSelect: "BtnSubtract")
+        Value = 2
     }
     @IBAction func BtnCollect(_ sender: Any) {
         ButtonFunction(BtnSelect: "BtnCollect")
-        if ValueOne == 0.0{
-            ValueOne = Double(TxtNumbers.text!)!
-            TxtNumbers.text = ""
-        }
+        Value = 1
     }
     
     @IBAction func BtnOne(_ sender: Any) {
@@ -187,16 +206,41 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func BtnDouble(_ sender: Any) {
+        TxtNumbers.text = String(TxtNumbers.text!) + String(".")
+    }
+    
     @IBAction func BtnEqual(_ sender: Any) {
         if TxtNumbers.text != "" {
             if ValueOne != 0.0 {
                 ValueTwo = Double(TxtNumbers.text!)!
-                TxtNumbers.placeholder = String(ValueOne + ValueTwo)
+                Calculater(Calc: Value)
                 TxtNumbers.text = ""
-                ValueOne = ValueOne + ValueTwo
-            }
+                            }
         }
     }
     
+    func Calculater(Calc: Int){
+        switch Calc{
+        case 1 :
+            self.TxtNumbers.placeholder = String(self.ValueOne + self.ValueTwo)
+            self.ValueOne = self.ValueOne + self.ValueTwo
+        case 2 :
+            self.TxtNumbers.placeholder = String(self.ValueOne - self.ValueTwo)
+            self.ValueOne = self.ValueOne - self.ValueTwo
+        case 3 :
+            self.TxtNumbers.placeholder = String(self.ValueOne * self.ValueTwo)
+            self.ValueOne = self.ValueOne * self.ValueTwo
+        case 4 :
+            self.TxtNumbers.placeholder = String(self.ValueOne / self.ValueTwo)
+            self.ValueOne = self.ValueOne / self.ValueTwo
+        case 5 :
+            print("")
+           // self.TxtNumbers.placeholder = String(self.ValueOne % self.ValueTwo)
+            // self.ValueOne = Double(self.ValueOne % self.ValueTwo)
+        default:
+            print("")
+        }
+    }
 }
 
