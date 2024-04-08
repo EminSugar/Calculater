@@ -29,7 +29,8 @@ class ViewController: UIViewController {
     var btnColor = UIColor(red: 0.5333333333, green: 0.5882352941176471, blue: 0.6666666666666666, alpha: 1)
     var btnColorSelect = UIColor(red: 0.803921568627451, green: 0.8705882352941177, blue: 1, alpha: 1)
     var Value = 0
-    
+    var ButtonFunc = ""
+    var FakeButton = UIButton()
     
     override func viewDidLoad() {
         ButtonStyle()
@@ -41,85 +42,79 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
+    func border(borderstyle : UIButton )
+    {
+        borderstyle.layer.borderWidth = 1
+        borderstyle.layer.borderColor = UIColor.black.cgColor
+        borderstyle.layer.cornerRadius = 5
+    }
     func ButtonStyle(){
-        BtnMod.layer.borderWidth = 1
-        BtnMod.layer.borderColor = UIColor.black.cgColor
-        BtnMod.layer.cornerRadius = 5
         
-        BtnDivide.layer.borderWidth = 1
-        BtnDivide.layer.borderColor = UIColor.black.cgColor
-        BtnDivide.layer.cornerRadius = 5
-        
-        BtnMultiply.layer.borderWidth = 1
-        BtnMultiply.layer.borderColor = UIColor.black.cgColor
-        BtnMultiply.layer.cornerRadius = 5
-        
-        BtnSubtract.layer.borderWidth = 1
-        BtnSubtract.layer.borderColor = UIColor.black.cgColor
-        BtnSubtract.layer.cornerRadius = 5
-        
-        BtnCollect.layer.borderWidth = 1
-        BtnCollect.layer.borderColor = UIColor.black.cgColor
-        BtnCollect.layer.cornerRadius = 5
-        
-        BtnClear.layer.borderWidth = 1
-        BtnClear.layer.borderColor = UIColor.black.cgColor
-        BtnClear.layer.cornerRadius = 5
-        
-        BtnReturn.layer.borderWidth = 1
-        BtnReturn.layer.borderColor = UIColor.black.cgColor
-        BtnReturn.layer.cornerRadius = 5
-        
-        BtnEqual.layer.borderWidth = 1
-        BtnEqual.layer.borderColor = UIColor.black.cgColor
-        BtnEqual.layer.cornerRadius = 5
-        
-        BtnHistory.layer.borderWidth = 1
-        BtnHistory.layer.borderColor = UIColor.black.cgColor
-        BtnHistory.layer.cornerRadius = 10
+        border(borderstyle: BtnMod)
+        border(borderstyle: BtnDivide)
+        border(borderstyle: BtnMultiply)
+        border(borderstyle: BtnSubtract)
+        border(borderstyle: BtnCollect)
+        border(borderstyle: BtnClear)
+        border(borderstyle: BtnReturn)
+        border(borderstyle: BtnEqual)
+        border(borderstyle: BtnHistory)
         
     }
-    func ButtonFunction(BtnSelect: String){
-            if BtnSelect == "BtnMod"{
-                BtnMod.backgroundColor = btnColorSelect
-                BtnDivide.backgroundColor = btnColor
-                BtnMultiply.backgroundColor = btnColor
-                BtnSubtract.backgroundColor = btnColor
-                BtnCollect.backgroundColor = btnColor
-            }
-            else if BtnSelect == "BtnDivide"
+    func ButtonFunction(BtnSelect: UIButton){
+            
+            if ButtonFunc == ""
             {
-                BtnDivide.backgroundColor = btnColorSelect
-                BtnMod.backgroundColor = btnColor
-                BtnMultiply.backgroundColor = btnColor
-                BtnSubtract.backgroundColor = btnColor
-                BtnCollect.backgroundColor = btnColor
+                BtnSelect.backgroundColor = btnColorSelect
+                FakeButton = BtnSelect
+                ButtonFunc = " "
             }
-            else if BtnSelect == "BtnMultiply"
+            else
             {
-                BtnMultiply.backgroundColor = btnColorSelect
-                BtnDivide.backgroundColor = btnColor
-                BtnMod.backgroundColor = btnColor
-                BtnSubtract.backgroundColor = btnColor
-                BtnCollect.backgroundColor = btnColor
+                FakeButton.backgroundColor = btnColor
+                BtnSelect.backgroundColor = btnColorSelect
+                FakeButton = BtnSelect
             }
-            else if BtnSelect == "BtnSubtract"
-            {
-                BtnSubtract.backgroundColor = btnColorSelect
-                BtnDivide.backgroundColor = btnColor
-                BtnMultiply.backgroundColor = btnColor
-                BtnMod.backgroundColor = btnColor
-                BtnCollect.backgroundColor = btnColor
-            }
-            else if BtnSelect == "BtnCollect"
-            {
-                BtnCollect.backgroundColor = btnColorSelect
-                BtnDivide.backgroundColor = btnColor
-                BtnMultiply.backgroundColor = btnColor
-                BtnSubtract.backgroundColor = btnColor
-                BtnMod.backgroundColor = btnColor
-            }
+        
+     //     if BtnSelect == BtnMod{
+     //         BtnMod.backgroundColor = btnColorSelect
+     //         BtnDivide.backgroundColor = btnColor
+     //         BtnMultiply.backgroundColor = btnColor
+     //         BtnSubtract.backgroundColor = btnColor
+     //         BtnCollect.backgroundColor = btnColor
+     //     }
+     //     else if BtnSelect == BtnDivide
+     //     {
+     //         BtnDivide.backgroundColor = btnColorSelect
+     //         BtnMod.backgroundColor = btnColor
+     //         BtnMultiply.backgroundColor = btnColor
+     //         BtnSubtract.backgroundColor = btnColor
+     //         BtnCollect.backgroundColor = btnColor
+     //     }
+     //     else if BtnSelect == BtnMultiply
+     //     {
+     //         BtnMultiply.backgroundColor = btnColorSelect
+     //         BtnDivide.backgroundColor = btnColor
+     //         BtnMod.backgroundColor = btnColor
+     //         BtnSubtract.backgroundColor = btnColor
+     //         BtnCollect.backgroundColor = btnColor
+     //     }
+     //     else if BtnSelect == BtnSubtract
+     //     {
+     //         BtnSubtract.backgroundColor = btnColorSelect
+     //         BtnDivide.backgroundColor = btnColor
+     //         BtnMultiply.backgroundColor = btnColor
+     //         BtnMod.backgroundColor = btnColor
+     //         BtnCollect.backgroundColor = btnColor
+     //     }
+     //     else if BtnSelect == BtnCollect
+     //     {
+     //         BtnCollect.backgroundColor = btnColorSelect
+     //         BtnDivide.backgroundColor = btnColor
+     //         BtnMultiply.backgroundColor = btnColor
+     //         BtnSubtract.backgroundColor = btnColor
+     //         BtnMod.backgroundColor = btnColor
+     //     }
         if TxtNumbers.text != ""{
             if ValueOne == 0.0{
                 ValueOne = Double(TxtNumbers.text!)!
@@ -143,23 +138,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func BtnMod(_ sender: Any) {
-        ButtonFunction(BtnSelect: "BtnMod")
+        ButtonFunction(BtnSelect: BtnMod)
         Value = 5
     }
     @IBAction func BtnDivide(_ sender: Any) {
-        ButtonFunction(BtnSelect: "BtnDivide")
+        ButtonFunction(BtnSelect: BtnDivide)
         Value = 4
     }
     @IBAction func BtnMultiply(_ sender: Any) {
-        ButtonFunction(BtnSelect: "BtnMultiply")
+        ButtonFunction(BtnSelect: BtnMultiply)
         Value = 3
     }
     @IBAction func BtnSubtract(_ sender: Any) {
-        ButtonFunction(BtnSelect: "BtnSubtract")
+        ButtonFunction(BtnSelect: BtnSubtract)
         Value = 2
     }
     @IBAction func BtnCollect(_ sender: Any) {
-        ButtonFunction(BtnSelect: "BtnCollect")
+        ButtonFunction(BtnSelect: BtnCollect)
         Value = 1
     }
     
